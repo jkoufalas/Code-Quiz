@@ -32,21 +32,20 @@ var completedQuestions;
 //the list of questions, their options the the answer each as an array of objects
 var questions = [
     {
-        question: "The HTML attribute used to define the internal stylesheet is___________",
-        A: "style",
-        B: "<style>",
-        C: "<link>",
-        D: "<script>",
-        E: "link",
-        answer: "<style>"
+        question: "What is the use of the <noscript> tag in Javascript?",
+        A: "The contents are displayed by non-JS-based browsers",
+        B: "Clears all the cookies and the cache",
+        C: "Both A and B",
+        D: "None",
+        answer: "The contents are displayed by non-JS-based browsers"
     },
     {
-        question: "Which of the following is the correct syntax to display the hyperlinks without any underline?",
-        A: "a {decoration : no-underline;}",
-        B: "a {text-decoration : underline;}",
-        C: "a {text-decoration : none;}",
+        question: "How are objects compared when they are checked with the strict equality operator?        ",
+        A: "The contents of the object are compared",
+        B: "Their references are compared",
+        C: "Both A and B",
         D: "None",
-        answer: "a {text-decoration : none;}"
+        answer: "Both A and B"
     },
     {
         question: "How to select the elements with the class name “example”?",
@@ -57,44 +56,44 @@ var questions = [
         answer: ".example"
     },
     {
-        question: "CSS stands for _________",
-        A: "Color and style sheets",
-        B: "Cascading style sheet",
-        C: "Cascade style sheets",
-        D: "None",
-        answer: "Cascading style sheet"
+        question: "Which of the following is the property that is triggered in response to JS errors?",
+        A: "onclick",
+        B: "onerror",
+        C: "onmessage",
+        D: "onexception",
+        answer: "onerror"
     },
     {
-        question: "Which of the following is the correct syntax to select the p siblings of a div element?",
-        A: "p",
-        B: "div p",
-        C: "div + p",
-        D: "div ~ p",
-        answer: "div ~ p"
+        question: "Which of the following variables takes precedence over the others if the names are the same?",
+        A: "Global variable",
+        B: "The local element",
+        C: "The two of the above",
+        D: "None of the above",
+        answer: "The local element"
     },
     {
-        question: "The CSS property used to specify the transparency of an element is____________",
-        A: "visibility",
-        B: "filter",
-        C: "opacity",
-        D: "overlay",
-        answer: "opacity"
+        question: "Which of the following number object function returns the value of the number?",
+        A: "toString()",
+        B: "valueOf()",
+        C: "toLocaleString()",
+        D: "toPrecision()",
+        answer: "valueOf()"
     },
     {
-        question: "Which of the following is not a type of combinator?",
-        A: "~",
-        B: ">",
-        C: "+",
-        D: "*",
-        answer: "*"
+        question: "Which of the following function of the String object returns the character in the string starting at the specified position via the specified number of characters?",
+        A: "slice()",
+        B: "split()",
+        C: "substr()",
+        D: "search()",
+        answer: "substr()"
     },
     {
-        question: "Which of the following selector in CSS is used to select the elements that do not match the selectors?",
-        A: ":not selector",
-        B: ":empty selector",
-        C: ":! selector",
-        D: "None",
-        answer: ":not selector"
+        question: "Which one of the following is known as the Equality operator, which is used to check whether the two values are equal or not?",
+        A: "=",
+        B: "===",
+        C: "==",
+        D: "&&",
+        answer: "=="
     },
     {
         question: "Javascript is an _______ language?",
