@@ -29,7 +29,7 @@ var stopTimer = false;
 var tenSecPenalty;
 var completedQuestions;
 
-
+//the list of questions, their options the the answer each as an array of objects
 var questions = [
     {
         question: "The HTML attribute used to define the internal stylesheet is___________",
@@ -186,25 +186,42 @@ function init(){
     }
 }
 
+//once the user has pressed start this method will start the game setting up what is required.
 function startGame(){
+    //initialises the variables needed each time the game is started
     question_number = 0;
     completedQuestions = 0;
     gameScreen.style.display = "block";
     startScreen.style.display = "none";
     timerDisplay.style.display = "block";
+    //duplicates the questions array so that we can maintain a current list of questions
+    //that haven't been used
     question_list = [...questions];
     secondsLeft = 90;
+
+    //gets the first question from the array of questions
     getNewQuestion();
+
+    //renders that question to the page
     renderQuestion();
+
+    //starts timer
     setTime();
+
+    //shows the initial time on the timer
     countdown.innerHTML = secondsLeft;
+    //this flag sets is set so if the game is stopped or redirected to another screen
+    //then it will stop the timer so that it wont continue
     stopTimer = false;
 }
 
 function getNewQuestion(){
+    //increment the question number so that it can be dynamically printed
     question_number++;
+    //randomly selects a question from the array and assigns it to the current question
     index = Math.floor(Math.random()*question_list.length);
     currentQuestion = question_list[index];
+    //removes it from the list so that it can be chosen again
     question_list.splice(index,1);
 }
 
@@ -212,38 +229,47 @@ function renderQuestion() {
     // Clear todoList element and update todoCountSpan
     questionList.innerHTML = "";
 
+    //loops through every item in the current question
     for (var key in currentQuestion) {
         if (currentQuestion.hasOwnProperty(key)) {
+            //if the attribute is the question then print it out
             if(key === "question"){
                 questionNumber.textContent = question_number + "/ ";
                 questionTitle.textContent = currentQuestion[key];
+            //if the key is the answer attribute then set it as the answer
             }else if(key === 'answer'){
             answer = currentQuestion[key];
+            //otherwise the key is an option
             }else{
+            //create list item element
             var li = document.createElement("li");
-            //li.textContent = key + "/ " + currentQuestion[key];
             li.setAttribute("question-index", key);
+            // create button
             var button = document.createElement("button");
+            // populate the buttons text with the option
             button.textContent = key + ". " + currentQuestion[key];
             button.classList.add('buttonStyle');
             li.appendChild(button);
+            //add button to list item
             questionList.appendChild(li);
+            //add list item to ul
             }
         }
     }
-    //answerResult.classList.remove('appear');
-
   }
 
   function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() {
-      
+      //these are the exit conditions for the timer 
+      //1. if the timer finishes
+      //2. if there are no more questions
+      //3. if the user moved away from the game to another screen
       if(secondsLeft === 0 || questions.length === completedQuestions || stopTimer) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
+        //making sure that the end game screen is not run if the user has moved away
         if(!stopTimer){
-        // Calls function to create and append image
             endGame();
         }
       }
@@ -252,12 +278,16 @@ function renderQuestion() {
     }, 1000);
   }
   function setTimeForAnswer() {
-    // Sets interval in variable
+    // this is a separate timer for the result that is shown when the user selects an option
+    // this is done because it cannot be done when the user clicks the button because at that time we
+    // are diplaying the result from being hidden. if we hide it at the same time then we will never see the answer
+    // because it will hide and show at the same time, the timer will wait, then hide the answer
     var countANS = 0;
     var answerInterval = setInterval(function() {
         countANS++;
         if(countANS === 7 || stopTimer){
             if(answerVisible){
+                //removes the appear class, but this seems to remove all classes so then i re add the animation class
                 answerResult.classList.remove('appear');
                 answerResult.classList.add('answer-animation');
                 answerVisible = false;
@@ -269,23 +299,29 @@ function renderQuestion() {
 
 
   function endGame(){
+    //displays the end game screen and hides the others
     gameScreen.style.display = "none";
     gameEndScreen.style.display = "block";
     timerDisplay.style.display = "none";
+    //sets the timer to final time and sets the final score
     timeLeft.textContent = secondsLeft;
     finalScore = secondsLeft;    
 }
 
-
+//when the user submits the initals to record then do this function
 function submitScore(event){
+    //stops the default submit logic
     event.preventDefault();
+    //creates the score object
     var scoreElement = {
         score: finalScore,
         initials: initialsInput.value.trim()
     }
+    //if the user didn't submit any initials then do nothing until they do
     if(initialsInput.value === ""){
         return;
     }
+
     var index;
     var positionFound = false;
     //insert score in list and add it ordered by high score
@@ -304,38 +340,43 @@ function submitScore(event){
     }else{
         highScore.push(scoreElement);
 
-    }   
+    }  
+    //once the high score array is set then push it to the local storage 
     localStorage.setItem("highScore", JSON.stringify(highScore));
 
+    //move to the high score screen
     gameEndScreen.style.display = "none";
     HighScoreScreen.style.display = "block";
 
+    //render the high score list
     createHighScoreList();
 
+    //make sure that the clear button is on the same line as the back button
     clearHighScoreButton.style.display = "inline";
-    //clearHighScoreButton.removeAttribute("style");
-    console.log("Got Here")
-
 }
 
 function goToHighScores(){
+    //displays high score screen and hide the others
     startScreen.style.display = "none";
     gameScreen.style.display = "none";
     startScreen.style.display = "none";
     gameEndScreen.style.display = "none";
     timerDisplay.style.display = "none";
     HighScoreScreen.style.display = "block";
-
+        
+    //render the high score list
     createHighScoreList();
     stopTimer = true;
 }
 
 function createHighScoreList(){
+    //resets the high score list
     highScorePageList.innerHTML = "";
+    //if the high score list is empty then done show the clear button
     if(highScore.length == 0){
         clearHighScoreButton.style.display = "none";
-        //clearHighScoreButton.style.visibility = "invisible";
     }
+    //loop through all the high scores and render them
     for (var i = 0; i < highScore.length; i++) {        
         var li = document.createElement("li");
         var adjustedIndex = i+1;
@@ -344,38 +385,44 @@ function createHighScoreList(){
     }
 
 }
-
+//when the users selects an option from the question
   questionList.addEventListener("click", function(event) {
+    //sets the element to the event the user clicked
     var element = event.target;
-    completedQuestions++;
     // Checks if element is a button
     if (element.matches("button") === true) {
-      // Get its data-index value and remove the todo element from the list
+        completedQuestions++;
+      // Get its data-index value from the parent li item
         var index = element.parentElement.getAttribute("question-index");
+        //if the option selected via the index is the same as the answer
         if(currentQuestion[index] === answer){
+            //if so display correct and change color to green
             answerResult.textContent = "Correct";
             answerResult.style.color = "Green"
         }else{
+            //if incorrect display wrong and change color to red
             answerResult.textContent = "Wrong";
             answerResult.style.color = "Red"
-
+            //if wrong and the timer is less than 10 secs then end game
             if(secondsLeft < 10){
                 secondsLeft = 0;
             }else{
+                //otherwise decrease time by 10 as penalty
                 secondsLeft = secondsLeft - 10;
             }
+            //display new time
             countdown.innerHTML = secondsLeft;
         }
+        //display result in div
         answerResult.classList.add('appear');
+        //set timer so that result can dissapear, cannot do at once as hide will override show
         setTimeForAnswer();
+        //sets the global variable to say that the answer is visible
         answerVisible = true;
-        console.log("questions.length: " + questions.length);
-        console.log("completedQuestions: " + completedQuestions);
+        //if all the questions have been answered end game, otherwise get new question and render it
         if (questions.length === completedQuestions){
-            console.log("got here:");
             endGame();
         }else{
-            console.log("got here:1");
             getNewQuestion();
             renderQuestion();
         }
@@ -383,14 +430,14 @@ function createHighScoreList(){
     
   });
 function clearHighScore(){
+    //clear high score from list, hide clear button, reset high score array and delete local storage of scores
   highScorePageList.innerHTML = "";
   clearHighScoreButton.style.display = "none";
-  //clearHighScoreButton.style.visibility = "invisible";
   localStorage.removeItem("highScore");
   highScore = [];
 }
 
-
+//when back button is pressed at high score then re initialise
 function goBack(){
     startScreen.style.display = "block";
     init();

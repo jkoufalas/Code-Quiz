@@ -15,14 +15,17 @@
         <h3 id="view-high-score"><button id="high-score">View High Scores</button></h3>
         <div id="countdown">Timer: <span id="countdownVal"></span></div>
     </header>
+    <!-- Section for start screen, initial page loaded, hidden when not used -->
     <section id="start-screen">
         <h1 align="center">Coding Quiz Challenge</h1>
         <br>
         <p align="center">Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds</p>
         <br>
         <button id="start-button" class="buttonStyle">Start Quiz</button>
+    <!-- Section for quiz game screen, hidden when game isn;t being played-->
     </section>
     <section id="game-screen">
+
         <span id="question-number"></span>
         <span align="center" id="question-title"></span>
         <br>
@@ -30,6 +33,7 @@
         </ul>
         <div id="answer-animation" class="answer-animation"></div>
     </section>
+    <!-- Sectiion/Screenc when the game has finished, shows score and has entry for user to add initals to record their score, hidden when not used -->
     <section id="game-end">
         <h1 align="center">All done!</h1>
         <div align="left">Your score is: <span id="timer"></span></div>
@@ -39,6 +43,7 @@
             <button id="submitButton" class="buttonStyle">Submit</button>
           </form>
     </section>
+    <!-- Section to display all the high scores, hidden when not used -->
     <section id="high-score-screen">
       <h1>Highscores.</h1>
       <ul id="highScoreList"></ul>
