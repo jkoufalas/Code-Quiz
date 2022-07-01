@@ -27,6 +27,7 @@ var answerVisible = false;
 var highScore = [];
 var stopTimer = false;
 var tenSecPenalty;
+var completedQuestions;
 
 
 var questions = [
@@ -187,6 +188,7 @@ function init(){
 
 function startGame(){
     question_number = 0;
+    completedQuestions = 0;
     gameScreen.style.display = "block";
     startScreen.style.display = "none";
     timerDisplay.style.display = "block";
@@ -237,7 +239,7 @@ function renderQuestion() {
     // Sets interval in variable
     var timerInterval = setInterval(function() {
       
-      if(secondsLeft === 0 || question_list.length === 0 || stopTimer) {
+      if(secondsLeft === 0 || questions.length === completedQuestions || stopTimer) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         if(!stopTimer){
@@ -345,7 +347,7 @@ function createHighScoreList(){
 
   questionList.addEventListener("click", function(event) {
     var element = event.target;
-  
+    completedQuestions++;
     // Checks if element is a button
     if (element.matches("button") === true) {
       // Get its data-index value and remove the todo element from the list
@@ -367,11 +369,15 @@ function createHighScoreList(){
         answerResult.classList.add('appear');
         setTimeForAnswer();
         answerVisible = true;
-        if (question_list.length > 0){
+        console.log("questions.length: " + questions.length);
+        console.log("completedQuestions: " + completedQuestions);
+        if (questions.length === completedQuestions){
+            console.log("got here:");
+            endGame();
+        }else{
+            console.log("got here:1");
             getNewQuestion();
             renderQuestion();
-        }else{
-            endGame();
         }
     }
     
