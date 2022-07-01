@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Quiz</title>
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+    <!-- The header that holds the high score link and the timer when visible -->
+    <header>
+        <h3 id="view-high-score"><button id="high-score">View High Scores</button></h3>
+        <div id="countdown">Timer: <span id="countdownVal"></span></div>
+    </header>
+    <section id="start-screen">
+        <h1 align="center">Coding Quiz Challenge</h1>
+        <br>
+        <p align="center">Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds</p>
+        <br>
+        <button id="start-button" class="buttonStyle">Start Quiz</button>
+    </section>
+    <section id="game-screen">
+        <span id="question-number"></span>
+        <span align="center" id="question-title"></span>
+        <br>
+        <ul align="left" id="multiple-choice-list">
+        </ul>
+        <div id="answer-animation" class="answer-animation"></div>
+    </section>
+    <section id="game-end">
+        <h1 align="center">All done!</h1>
+        <div align="left">Your score is: <span id="timer"></span></div>
+        <form method="POST" id="form">
+            <div id="initials-text">Enter Initials:</div>
+            <input type="text" id="initials" placeholder="Enter you Initials" />
+            <button id="submitButton" class="buttonStyle">Submit</button>
+          </form>
+    </section>
+    <section id="high-score-screen">
+      <h1>Highscores.</h1>
+      <ul id="highScoreList"></ul>
+      <button id="go-back" class="buttonStyle">Go Back</button>
+      <button id="clear-high-scores" class="buttonStyle">Clear</button>
+    </section>
+
+ 
+  <script src= "./assets/js/script.js"></script>
+</body>
+</html>

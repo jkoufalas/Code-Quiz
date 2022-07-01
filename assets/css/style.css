@@ -1,0 +1,149 @@
+header {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}
+
+#view-high-score{
+   position: relative;
+   width: 50%;
+}
+
+#high-score{
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+   background-color: white;
+   border: 0ch;
+   }
+
+ #high-score:hover{
+   text-decoration: underline;
+}
+
+#countdown{
+    position: relative;
+    text-align: right;
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+ }
+
+ #start-screen{
+    width: 50%;
+    margin: auto;
+    line-height: 1.5;
+ }
+
+ #start-screen h1{
+   font-size: 25px;
+   font-weight: bold;
+ }
+
+ #start-screen p{
+   font-size: 18px;
+ }
+
+ #start-button{
+    display: block;
+    margin: auto;
+ }
+
+ #game-screen{
+   line-height: 1.5;
+   width: 50%;
+   margin: auto;
+   border-style: solid;
+   border-color: blue;
+   border-radius: 8px;
+   padding:20px;
+}
+
+#answer-animation{
+   font-size: 22px;
+   border-top: 3px solid;
+   line-height: 2;
+   margin-top: 10px;
+}
+
+#game-screen span{
+   font-size: 22px;
+   font-weight: bold;
+}
+
+#game-end{
+   width: 50%;
+   margin: auto;
+}
+
+#game-end h1{
+   font-size: 25px;
+}
+
+#game-end div{
+   font-size: 18px;
+   font-weight: bold;
+}
+
+#initials-text{
+   display: inline;
+}
+
+
+ #high-score-screen{
+   width: 50%;
+    margin: auto;
+    line-height: 1.5;
+ }
+
+ #high-score-screen h1{
+   font-size: 25px;
+ }
+
+ #high-score-screen ul{
+   font-size: 18px;
+ }
+
+ .answer-animation{
+   -webkit-transition: 0.5s;
+   -moz-transition: 0.5s;
+   -ms-transition: 0.5s;
+   -o-transition: 0.5s;
+   transition: 0.5s;
+   opacity: 0;
+ }
+
+ .answer-animation.appear{
+   opacity: 1;
+
+ }
+
+ .buttonStyle{
+   font-size: 22px;
+   background-color: blue;
+   border-color: darkblue;
+   color: white;
+   border-radius: 8px;
+   padding: 5px;
+   margin: 5px;
+ }
+
+ .buttonStyle:hover{
+   box-shadow: 0px 1px 10px 5px rgb(9, 22, 174) inset;
+   box-shadow: 1px 0px 10px 5px rgb(9, 22, 174) inset;
+}
+
+ #highScoreList li{
+   background-color: lightgray;
+   margin: 10px;
+   padding: 5px;
+   font-weight: bold;
+ }
+
+ #go-back, #clear-high-scores{
+   display:inline;
+}
